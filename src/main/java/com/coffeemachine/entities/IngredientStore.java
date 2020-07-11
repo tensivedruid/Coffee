@@ -23,16 +23,15 @@ public class IngredientStore {
 
     public synchronized Ingredient takeIngredient(final IngredientType ingredientType, int amount) throws IngredientsNotAvailableException {
         if (ingredientCapacityMap.get(ingredientType) < amount) {
-            throw new IngredientsNotAvailableException(ingredientType.name() + "Ingredients not available");
+            throw new IngredientsNotAvailableException("Ingredient "+ ingredientType.name() + " not available");
         }
 
         ingredientCapacityMap.put(ingredientType, ingredientCapacityMap.get(ingredientType) - amount);
         return new Ingredient(ingredientType, amount);
     }
 
-    public Ingredient addIngredient(final IngredientType ingredientType, int amount) {
+    public void addIngredient(final IngredientType ingredientType, int amount) {
         ingredientCapacityMap.put(ingredientType, ingredientCapacityMap.get(ingredientType) + amount);
-        return new Ingredient(ingredientType,amount);
     }
     public  static IngredientStore getInstance(){
         return INGREDIENT_STORE;
