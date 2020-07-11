@@ -11,7 +11,7 @@ public class BeverageMachineTest {
 
     @BeforeClass
     public static void  once(){
-        beverageMachine = new BeverageMachine(3, new BeverageManagerFactory());
+        beverageMachine = new BeverageMachine(4, new BeverageManagerFactory());
     }
 
     @Test
