@@ -37,6 +37,7 @@ public class BeverageMachineTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
     private Thread prepareBeverage(final BeverageType beverageType) {
