@@ -19,14 +19,18 @@ public class BeverageMachine {
 
     public Beverage prepareBeverage(final BeverageType beverageType) throws IngredientsNotAvailableException, OutletNotAvailableException {
         if (freeOutlets.get() == 0) {
-            throw new OutletNotAvailableException("No outlets is free");
+            throw new OutletNotAvailableException( beverageType.name() + " cannot be prepared as no outlets is free");
         }
 
         System.out.println(" Preparing " + beverageType.name());
         freeOutlets.decrementAndGet();
+
         final BeverageManager beverageManager = beverageManagerFactory.getBeverageManager(beverageType);
+
         final Beverage beverage = beverageManager.prepare();
+        System.out.println(" Prepared " + beverageType.name());
         freeOutlets.incrementAndGet();
         return beverage;
+
     }
 }

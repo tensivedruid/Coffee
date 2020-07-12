@@ -10,7 +10,7 @@ public class IngredientStore {
 
     private final Map<IngredientType, Integer> ingredientCapacityMap;
 
-    public IngredientStore() {
+    private IngredientStore() {
         this.ingredientCapacityMap = new HashMap<IngredientType, Integer>();
         ingredientCapacityMap.put(IngredientType.MILK, 100);
         ingredientCapacityMap.put(IngredientType.WATER, 100);
@@ -21,9 +21,9 @@ public class IngredientStore {
         ingredientCapacityMap.put(IngredientType.GINGER_SYRUP, 500);
     }
 
-    public synchronized Ingredient takeIngredient(final IngredientType ingredientType, int amount) throws IngredientsNotAvailableException {
+    public synchronized Ingredient takeIngredient(final BeverageType beverageType, final IngredientType ingredientType, int amount) throws IngredientsNotAvailableException {
         if (ingredientCapacityMap.get(ingredientType) < amount) {
-            throw new IngredientsNotAvailableException("Ingredient "+ ingredientType.name() + " not available");
+            throw new IngredientsNotAvailableException(beverageType.name() + " cannot be prepared since Ingredient "+ ingredientType.name() + " is not available");
         }
 
         ingredientCapacityMap.put(ingredientType, ingredientCapacityMap.get(ingredientType) - amount);
@@ -33,7 +33,10 @@ public class IngredientStore {
     public void addIngredient(final IngredientType ingredientType, int amount) {
         ingredientCapacityMap.put(ingredientType, ingredientCapacityMap.get(ingredientType) + amount);
     }
-    public  static IngredientStore getInstance(){
+
+    //
+    public static IngredientStore getInstance(){
         return INGREDIENT_STORE;
     }
 }
+
