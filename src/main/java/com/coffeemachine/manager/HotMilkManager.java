@@ -8,7 +8,7 @@ public class HotMilkManager implements BeverageManager {
     @Override
     public Beverage prepare() throws IngredientsNotAvailableException {
         final IngredientStore ingredientStore = IngredientStore.getInstance();
-        final Ingredient ingredient = ingredientStore.takeIngredient(IngredientType.MILK, 5);
+        final Ingredient ingredient = ingredientStore.takeIngredient(BeverageType.HOT_MILK, IngredientType.MILK, 5);
         return new HotMilk(Lists.newArrayList(ingredient));
     }
 }
